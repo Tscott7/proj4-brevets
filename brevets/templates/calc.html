@@ -54,7 +54,7 @@
 <!-- Design on bootstrap grid -->
 <form role="form">
 <div class="row">
-  <div class="col-md-4">
+  <div class="selector">
     <label>Distance</label>
   <select name="distance" id="brevet_dist_km">
     <option value="200">200km</option>
@@ -124,10 +124,17 @@
   // stash them in hidden fields.) 
   function calc_times(control) {
     var km = control.find("input[name='km']").val();
+    console.log("km = " + km)
+    var begin_date = $("#begin_date").val()
+    console.log("begin_date = " + begin_date)
+    var begin_time = $("#begin_time").val()
+    console.log("begin_time = " + begin_time)
+    var brev_dist = $("#brevet_dist_km").val()
+    console.log("brev_dist = " + brev_dist)
     var open_time_field = control.find("input[name='open']");
     var close_time_field = control.find("input[name='close']");
     
-    $.getJSON(TIME_CALC_URL, { km: km }, 
+    $.getJSON(TIME_CALC_URL, { km: km, begin_time: begin_time, begin_date: begin_date, brev_dist: brev_dist }, 
       // response handler
       function(data) {
          var times = data.result;
